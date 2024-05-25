@@ -1,0 +1,19 @@
+﻿@model Agri_Ene.Models.AgriUser
+
+@{
+    ViewData["Title"] = "User Details";
+}
+
+<h2 class="text-center">Howdy Farmer, Welcome back to Agri-Energy</h2>
+
+<div class="card">
+    <div class="card-header">
+        User Profile
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">@Model.UserName</h5>
+        <p class="card-text"><strong>Email:</strong> @Model.Email</p>
+        <p class="card-text"><strong>Phone:</strong> @Model.PhoneNumber</p>
+        <!-- Add more user data fields here as needed -->
+    </div>
+</div>

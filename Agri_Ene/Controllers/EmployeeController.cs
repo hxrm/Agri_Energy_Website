@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Agri_Ene.Controllers
 {
-    [Authorize(Roles ="farmer")]
-    public class AccountController : Controller
+    [Authorize(Roles = "employee")]
+    public class EmployeeController : Controller
     {
         private readonly UserManager<AgriUser> _userManager;
 
-        public AccountController(UserManager<AgriUser> userManager)
+        public EmployeeController (UserManager<AgriUser> userManager)
         {
             _userManager = userManager;
         }

@@ -61,6 +61,9 @@ namespace Agri_Ene.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+
+            
+            public string Role { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -116,8 +119,10 @@ namespace Agri_Ene.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                                    
                     return LocalRedirect(returnUrl);
                 }
+            
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });

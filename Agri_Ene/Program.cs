@@ -15,7 +15,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Sauce"));
 });
 
-builder.Services.AddDefaultIdentity<AgriUser>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddDefaultIdentity<AgriUser>(options => options.SignIn.RequireConfirmedAccount = false).
+    AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
 
 

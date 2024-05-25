@@ -22,6 +22,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Agri_Ene.Areas.Identity.Pages.Account
 {
+    [Authorize(Roles = "employee")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<AgriUser> _signInManager;
@@ -79,9 +80,11 @@ namespace Agri_Ene.Areas.Identity.Pages.Account
 
             [Required]
             public string PhoneNumber { get; set; }
+            [Required]
+            public string Role { get; set; }
 
-          //  [Required]
-            
+            //  [Required]
+
             public string Address { get; set; }
 
 
@@ -124,7 +127,9 @@ namespace Agri_Ene.Areas.Identity.Pages.Account
         //Post method to process form 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
+            // returnUrl ??= Url.Content("~/");
+            //return to home 
+            returnUrl ??= Url.Action("Index", "Home");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -145,9 +150,13 @@ namespace Agri_Ene.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     //Set User Role
-                    await _userManager.AddToRoleAsync(user, "farmer");
-                    
-                    
+                 //   await _userManager.AddToRoleAsync(user, "farmer");
+
+                    // Set User Role based on the selected role
+                    var role = Input.Role == "employee" ? "employee" : "farmer";
+                    await _userManager.AddToRoleAsync(user, role);
+
+
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -166,7 +175,7 @@ namespace Agri_Ene.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
+                       // await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }
                 }

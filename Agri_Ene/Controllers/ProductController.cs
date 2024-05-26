@@ -69,15 +69,6 @@ namespace Agri_Ene.Controllers
             return View();
         }
 
-        //public async Task<IActionResult> CatList()//Controller
-        //{
-
-        //    //Getting the Model (product)
-        //    // var products = _context.Products.ToList();//Model
-        //    IEnumerable<Product> products = await _prodRepo.GetAll();
-        //    //passing and returning with View 
-        //    return View(products);//View
-        //}
         public async Task<IActionResult> CatList()
         {
             // Get all categories for the dropdown
@@ -90,14 +81,32 @@ namespace Agri_Ene.Controllers
             IEnumerable<Product> products = await _prodRepo.GetAll();
             return View(products);
         }
-        // Method to get products by category
+        //// Method to get products by category
+        //[HttpGet]
+        //public async Task<IActionResult> GetProductsByCategory(ProductCategories category)
+        //{
+        //    // Get products by the selected category
+        //    IEnumerable<Product> products = await _prodRepo.GetProdBy_Category(category);
+        //    return PartialView("ProductList", products);
+        //}
         [HttpGet]
-        public async Task<IActionResult> GetProductsByCategory(ProductCategories category)
+        public async Task<IActionResult> GetProductsByCategory(ProductCategories? category, DateTime? startDate, DateTime? endDate)
         {
-            // Get products by the selected category
-            IEnumerable<Product> products = await _prodRepo.GetProdBy_Category(category);
+            var products = await _prodRepo.GetAll();
+
+            if (category.HasValue)
+            {
+                products = products.Where(p => p.prodCategory == category.Value);
+            }
+
+            if (startDate.HasValue && endDate.HasValue)
+            {
+                products = products.Where(p => p.productionDate >= startDate.Value && p.productionDate <= endDate.Value);
+            }
+
             return PartialView("ProductList", products);
         }
+
         //[HttpPost]
         //public async Task<IActionResult> CatList([FromBody] DateRangeViewModel model)
         //{

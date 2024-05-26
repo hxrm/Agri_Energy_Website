@@ -6,14 +6,21 @@
 }
 
 <div>
+    <input type="date" class="form-control" id="startDate" name="startDate" max="9999-12-31">
+    <input type="date" class="form-control" id="endDate" name="endDate" max="9999-12-31">
+    <div class="invalid-feedback">
+        Please select a date range to view products.
+    </div>
     <label for="categorySelect">Select Category:</label>
     <select id="categorySelect">
+        <option value="">None</option>
         @foreach (var category in categories)
         {
             <option value="@category">@category</option>
         }
     </select>
     <button id="showButton">Show</button>
+    <button id="clearButton">Clear</button>
 </div>
 
 <div id="productList">
@@ -26,10 +33,36 @@
         $(document).ready(function () {
             $('#showButton').click(function () {
                 var selectedCategory = $('#categorySelect').val();
+                var startDate = $('#startDate').val();
+                var endDate = $('#endDate').val();
+
                 $.ajax({
                     url: '@Url.Action("GetProductsByCategory", "Product")',
                     type: 'GET',
-                    data: { category: selectedCategory },
+                    data: {
+                        category: selectedCategory,
+                        startDate: startDate,
+                        endDate: endDate
+                    },
+                    success: function (data) {
+                        $('#productList').html(data);
+                    }
+                });
+            });
+
+            $('#clearButton').click(function () {
+                $('#categorySelect').val('');
+                $('#startDate').val('');
+                $('#endDate').val('');
+
+                $.ajax({
+                    url: '@Url.Action("GetProductsByCategory", "Product")',
+                    type: 'GET',
+                    data: {
+                        category: '',
+                        startDate: '',
+                        endDate: ''
+                    },
                     success: function (data) {
                         $('#productList').html(data);
                     }

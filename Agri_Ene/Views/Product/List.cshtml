@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Agri_Ene.Models.Product>
+
+<h2 class="text-center mb-5">Product List</h2>
+
+<div class="row mb-5">
+    <div class="col">
+        <a class="btn btn-primary" asp-controller="Product" asp-action="Create">Add Product</a>
+    </div>
+</div>
+@if (Model.Any())
+{
+<div class="col">
+
+</div>
+    <table class="table">
+        <thead>
+            <tr>
+               
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Production Date</th>
+                <th>Farmer</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.prodName</td>
+                    <td>@product.prodCategory</td>   
+                    <td>@product.productionDate</td> 
+                    <td>@product.Farmer</td>
+                    <td style="white-space:nowrap">
+                        <a class="btn btn-primary btn-sm" asp-controller="Product" asp-action="Delete" asp-route-id="@product.prodId">
+                            Delete
+                        </a>                    
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{//add image with vid at 19:53 https://www.youtube.com/watch?v=SfWuOFEatYc&t=1536s
+    <p>No products found.</p>
+}

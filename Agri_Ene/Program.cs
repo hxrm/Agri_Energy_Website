@@ -2,6 +2,9 @@ using Agri_Ene.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Agri_Ene.Models;
+using Agri_Ene.Interface;
+using Agri_Ene.Repository;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +24,12 @@ builder.Services.AddDefaultIdentity<AgriUser>(options => options.SignIn.RequireC
 
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+// Register the ClaimsPrincipal service
+builder.Services.AddScoped<ClaimsPrincipal>(provider =>
+    provider.GetService<IHttpContextAccessor>()?.HttpContext?.User);
+
 var app = builder.Build();
 
 

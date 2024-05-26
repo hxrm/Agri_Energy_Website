@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Agri_Ene.Models.Product>
+
+<h2 class="text-center mb-5">Product List</h2>
+
+<div class="row mb-5">
+    <!-- Production Date Input -->
+    <div class="col-12">
+        <label class="form-label">Date Range</label>
+        <div class="input-group has-validation">
+            <input type="date" class="form-control" id="startDate" name="startDate" required max="9999-12-31">
+            <input type="date" class="form-control" id="endDate" name="endDate" required max="9999-12-31">
+            <button id="filterBtn" class="btn btn-primary">Filter</button>                       
+             <select id="selCategory" class="btn btn-primary" asp-items="Html.GetEnumSelectList<Agri_Ene.Data.ProductCategories>()">Category</select>
+             <div class="invalid-feedback">
+                   Please select a valid category.
+             </div>          
+            <div class="invalid-feedback">
+                Please select a date range to view products.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="productList">
+    @* Partial view for displaying product list *@
+    @Html.Partial("ProductList", Model)
+</div>
+
+<script>
+    document.getElementById('filterBtn').addEventListener('click', function () {
+        var startDate = document.getElementById('startDate').value;
+        var endDate = document.getElementById('endDate').value;
+        fetch('@Url.Action("FilterList", "Product")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({ startDate: startDate, endDate: endDate })
+        })
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('productList').innerHTML = html;
+            });
+    });
+</script>
+

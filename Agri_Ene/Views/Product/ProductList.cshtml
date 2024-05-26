@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Agri_Ene.Models.Product>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Farmer</th>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Production Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Farmer?.FirstName</td>
+                    <td>@product.prodName</td>
+                    <td>@product.prodCategory</td>
+                    <td>@product.productionDate?.ToString("yyyy-MM-dd")</td>
+                    <td style="white-space:nowrap">
+                        <a class="btn btn-primary btn-sm" asp-controller="Product" asp-action="Delete" asp-route-id="@product.prodId">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No products found.</p>
+}

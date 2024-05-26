@@ -9,11 +9,11 @@
         <div class="input-group has-validation">
             <input type="date" class="form-control" id="startDate" name="startDate" required max="9999-12-31">
             <input type="date" class="form-control" id="endDate" name="endDate" required max="9999-12-31">
-            <button id="filterBtn" class="btn btn-primary">Filter</button>                       
-             <select id="selCategory" class="btn btn-primary" asp-items="Html.GetEnumSelectList<Agri_Ene.Data.ProductCategories>()">Category</select>
-             <div class="invalid-feedback">
-                   Please select a valid category.
-             </div>          
+            <select id="selCategory" class="btn btn-primary" asp-items="Html.GetEnumSelectList<Agri_Ene.Data.ProductCategories>()">Category</select>
+            <div class="invalid-feedback">
+                Please select a valid category.
+            </div>
+            <button id="filterBtn" class="btn btn-primary">Filter</button>                            
             <div class="invalid-feedback">
                 Please select a date range to view products.
             </div>

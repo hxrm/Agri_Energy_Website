@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Agri_Ene.Models.Product>
+
+@{
+    ViewBag.Title = "Product List by Category";
+    var categories = ViewBag.Categories as List<Agri_Ene.Data.ProductCategories>;
+}
+
+<div>
+    <label for="categorySelect">Select Category:</label>
+    <select id="categorySelect">
+        @foreach (var category in categories)
+        {
+            <option value="@category">@category</option>
+        }
+    </select>
+    <button id="showButton">Show</button>
+</div>
+
+<div id="productList">
+    @Html.Partial("ProductList", Model)
+</div>
+
+@section Scripts {
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#showButton').click(function () {
+                var selectedCategory = $('#categorySelect').val();
+                $.ajax({
+                    url: '@Url.Action("GetProductsByCategory", "Product")',
+                    type: 'GET',
+                    data: { category: selectedCategory },
+                    success: function (data) {
+                        $('#productList').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -11,7 +11,7 @@ namespace Agri_Ene.Interface
         Task<Product> GetByIdAsync(int id);
         Task<IEnumerable<Product>> GetByFarmer(string farmer);
         Task<IEnumerable<Product>> GetProductsByDateRange(DateTime startDate, DateTime endDate);
-        Task<IEnumerable<Product>> GetProdByDate_Category(DateTime startDate, DateTime endDate, ProductCategories? category);
+        Task<IEnumerable<Product>> GetProdBy_Category(ProductCategories? category);
         //CRUD commands
         bool Add(Product product);
         bool Update(Product product);

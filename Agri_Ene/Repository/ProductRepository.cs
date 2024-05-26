@@ -78,14 +78,10 @@ namespace Agri_Ene.Repository
                 .Where(p => p.productionDate >= startDate && p.productionDate <= endDate)
                 .ToListAsync();
         }
-        public async Task<IEnumerable<Product>> GetProdByDate_Category(DateTime startDate, DateTime endDate, ProductCategories? category)
+        public async Task<IEnumerable<Product>> GetProdBy_Category( ProductCategories? category)
         {
             var query = _context.Products.AsQueryable();
 
-            if (startDate != DateTime.MinValue && endDate != DateTime.MinValue)
-            {
-                query = query.Where(p => p.productionDate >= startDate && p.productionDate <= endDate);
-            }
 
             if (category.HasValue)
             {

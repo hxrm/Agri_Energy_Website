@@ -2,11 +2,12 @@
 using Agri_Ene.Interface;
 using Agri_Ene.Models;
 using Agri_Ene.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Agri_Ene.Controllers
 {
-
+    [Authorize]
     public class ProductController : Controller
     {
         //Reference to database for "Context"
@@ -44,12 +45,15 @@ namespace Agri_Ene.Controllers
             return View(products);//View
         }
         public async Task<IActionResult> FilterList()//Controller
-        {
-            //Getting the Model (product)
-            // var products = _context.Products.ToList();//Model
+        {  // Get all categories for the dropdown
+            var categories = Enum.GetValues(typeof(ProductCategories)).Cast<ProductCategories>().ToList();
+
+            // Pass categories to the view
+            ViewBag.Categories = categories;
+
+            // Initially, pass all products to the view
             IEnumerable<Product> products = await _prodRepo.GetAll();
-            //passing and returning with View 
-            return View(products);//View
+            return View(products);
         }
         [HttpPost]
         public async Task<IActionResult> FilterList([FromBody] DateRangeViewModel dateRange)
@@ -68,27 +72,8 @@ namespace Agri_Ene.Controllers
             }
             return View();
         }
-
-        public async Task<IActionResult> CatList()
-        {
-            // Get all categories for the dropdown
-            var categories = Enum.GetValues(typeof(ProductCategories)).Cast<ProductCategories>().ToList();
-
-            // Pass categories to the view
-            ViewBag.Categories = categories;
-
-            // Initially, pass all products to the view
-            IEnumerable<Product> products = await _prodRepo.GetAll();
-            return View(products);
-        }
-        //// Method to get products by category
-        //[HttpGet]
-        //public async Task<IActionResult> GetProductsByCategory(ProductCategories category)
-        //{
-        //    // Get products by the selected category
-        //    IEnumerable<Product> products = await _prodRepo.GetProdBy_Category(category);
-        //    return PartialView("ProductList", products);
-        //}
+     
+      
         [HttpGet]
         public async Task<IActionResult> GetProductsByCategory(ProductCategories? category, DateTime? startDate, DateTime? endDate)
         {
@@ -107,17 +92,7 @@ namespace Agri_Ene.Controllers
             return PartialView("ProductList", products);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> CatList([FromBody] DateRangeViewModel model)
-        //{
-        //    var selectedCategory = model.Category;
-        //    IEnumerable<Product> products = await _prodRepo.GetProdBy_Category(model.Category);
-        //    return PartialView("ProductList", products);
-
-
-        //}
-
-
+       
         public class DateRangeViewModel
         {
             public string StartDate { get; set; }

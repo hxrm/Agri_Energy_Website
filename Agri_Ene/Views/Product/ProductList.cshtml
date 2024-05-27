@@ -21,8 +21,8 @@
                     <td>@product.prodCategory</td>
                     <td>@product.productionDate?.ToString("yyyy-MM-dd")</td>
                     <td style="white-space:nowrap">
-                        <a class="btn btn-primary btn-sm" asp-controller="Product" asp-action="Delete" asp-route-id="@product.prodId">
-                            Delete
+                       <a class="btn btn-primary btn-sm" asp-controller="Product" asp-action="Details" asp-route-id="@product.prodId">
+                            View
                         </a>
                     </td>
                 </tr>

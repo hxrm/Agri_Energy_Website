@@ -14,6 +14,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 
 :root,
+
 [data-bs-theme=light] {
     --bs-blue: #378dfc;
     --bs-indigo: #6610f2;
@@ -38,10 +39,10 @@
     --bs-gray-700: #7b8ab8;
     --bs-gray-800: #444b40;
     --bs-gray-900: #212529;
-    --bs-primary: #378dfc;
-    --bs-secondary: #d9e3f1;
-    --bs-success: #43cc29;
-    --bs-info: #5b62f4;
+    --bs-primary: #32362B;
+    --bs-secondary: #99C930;
+    --bs-success: #EDFFF2;
+    --bs-info: #CBFDC3;
     --bs-warning: #ffc107;
     --bs-danger: #e52527;
     --bs-light: #f0f5fa;

@@ -21,7 +21,13 @@
 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Details">User</a>-->
 @if (SignInManager.IsSignedIn(User))
 {
-    var user = await UserManager.GetUserAsync(User);
+    <form id="roleCheckForm" method="post" action="/Home/GetUserRole"></form>
+    <script type="text/javascript">
+        window.onload = function () {
+            document.getElementById('roleCheckForm').submit();
+        };
+    </script>
+    /*var user = await UserManager.GetUserAsync(User);
     var roles = await UserManager.GetRolesAsync(user);
 
 
@@ -44,7 +50,7 @@
         </div>
 
 
-    }
+    }*/
 
 }
 else

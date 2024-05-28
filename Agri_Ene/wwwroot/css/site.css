@@ -17,6 +17,30 @@ html {
   min-height: 100%;
 }
 
+/*body {
+    margin-bottom: 60px;
+    background: linear-gradient(to right, #0062E6, #33AEFF);
+}*/
 body {
-  margin-bottom: 60px;
+    /* background-color: #EDFFF2; /Default background color */
+    
+    background: rgb(168,179,68);
+    background: linear-gradient(0deg, rgba(168,179,68,1) 0%, rgba(184,255,129,1) 100%);
+}
+
+
+.bg-dark {
+    background-color: #32362B;
+}
+
+.bg-light-green {
+    background-color: #99C930;
+}
+
+.bg-light {
+    background-color: #CBFDC3;
+}
+
+.bg-default {
+    background-color: #EDFFF2;
 }

@@ -10,6 +10,8 @@ namespace Agri_Ene.Interface
         Task<IEnumerable<Product>> GetAll();
         Task<Product> GetByIdAsync(int id);
         Task<IEnumerable<Product>> GetByFarmer(string farmer);
+        Task<(string firstName, string lastName)> GetFarmer(int? productId);
+        Task<AgriUser> GetFarmerDetails();
         Task<IEnumerable<Product>> GetProductsByDateRange(DateTime startDate, DateTime endDate);
         Task<IEnumerable<Product>> GetProdBy_Category(ProductCategories? category);
         //CRUD commands

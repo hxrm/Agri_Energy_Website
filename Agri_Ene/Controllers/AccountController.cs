@@ -19,6 +19,10 @@ namespace Agri_Ene.Controllers
         {
             return View();
         }
+        public IActionResult T()
+        {
+            return View();
+        }
 
         [Authorize]
         public async Task<IActionResult> Details()

@@ -9,8 +9,7 @@ namespace Agri_Ene.Models
         [Key]
         public int? prodId { get; set; }
         public string? prodName { get; set; }
-        //  public string? prodCategory { get; set; }
-        /*Might have to swap out the string for thus enum( in db too*/
+        public string? prodDescription { get; set; }
         public ProductCategories prodCategory { get; set; }
         public DateTime? productionDate { get; set; }
         // Specify the foreign key property

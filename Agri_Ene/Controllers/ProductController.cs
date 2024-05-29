@@ -1,9 +1,11 @@
 ﻿using Agri_Ene.Data;
 using Agri_Ene.Interface;
 using Agri_Ene.Models;
+using Agri_Ene.Repository;
 using Agri_Ene.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Agri_Ene.Controllers
 {
@@ -24,15 +26,18 @@ namespace Agri_Ene.Controllers
         public ProductController(IProductRepository prodRepo)
         {
 
-            _prodRepo = prodRepo;
+            _prodRepo = prodRepo;           
 
-        }
+        }     
         //Shows all the products
         public async Task<IActionResult> Index()//Controller
         {
             //Getting the Model (product)
             // var products = _context.Products.ToList();//Model
             IEnumerable<Product> products = await _prodRepo.GetAll();
+            AgriUser farmer = await _prodRepo.GetFarmerDetails();
+
+            ViewData["Farmer"] = farmer;
             //passing and returning with View 
             return View(products);//View
         }
@@ -103,22 +108,13 @@ namespace Agri_Ene.Controllers
 
         //Shows a single selected Product
         public async Task<IActionResult> Details(int id)
-        {//https://localhost:7069/Product/Details/1
-         //WILL NOT WORK UNTIL THERE IS ID DATA
-         //Searches entire table ans return prod according to ID
-         // Product product = _context.Products.Include(f=>f.Farmer).FirstOrDefault(product => product.prodId == selectId);
-         // Searches the entire table and returns the product according to the ID
-            /* Product product = _context.Products
-                                      .Include(p => p.Farmer)
-                     .FirstOrDefault(p => p.prodId == selectId);
-
-             if (product == null)
-             {
-                 return NotFound();
-             }
-            */
-            //WORKING?? BEFORE REOP ADDED   Product product = await _context.Products.FirstOrDefault(i => i.prodId == selectId);
+        {
             var product = await _prodRepo.GetByIdAsync(id);
+            (string firstName, string lastName) = await _prodRepo.GetFarmer(product.prodId);
+            ViewData["SellerFirstName"] = firstName;
+            ViewData["SellerLastName"] = lastName;
+
+
             return View(product);
 
         }

@@ -17,7 +17,7 @@ namespace Agri_Ene.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.9")
+                .HasAnnotation("ProductVersion", "7.0.18")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -107,6 +107,9 @@ namespace Agri_Ene.Migrations
                     b.Property<int>("prodCategory")
                         .HasColumnType("int");
 
+                    b.Property<string>("prodDescription")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("prodName")
                         .HasColumnType("nvarchar(max)");
 
@@ -149,13 +152,13 @@ namespace Agri_Ene.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f7e57674-3349-497b-b843-bf1fdfda8fa5",
+                            Id = "f084be5a-988d-4913-99a6-1d46cdab6d11",
                             Name = "employee",
                             NormalizedName = "employee"
                         },
                         new
                         {
-                            Id = "740ba71f-caaa-4830-a73c-fbecdbc8ffb6",
+                            Id = "0e5daad4-d0a4-4ddc-ba90-74a0fc1294de",
                             Name = "farmer",
                             NormalizedName = "farmer"
                         });
@@ -214,10 +217,12 @@ namespace Agri_Ene.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -254,10 +259,12 @@ namespace Agri_Ene.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");

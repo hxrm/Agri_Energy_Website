@@ -90,6 +90,32 @@ namespace Agri_Ene.Repository
 
             return await query.ToListAsync();
         }
+        public async Task<AgriUser> GetFarmerDetails()
+        {
+            // Get the current user's ID
+            var userId = _currentUser.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            // Retrieve the farmer based on the user ID
+            var farmer = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+            return farmer;
+        }
+        public async Task<(string firstName, string lastName)> GetFarmer(int? productId)
+        {
+            var product = await _context.Products
+                .Where(p => p.prodId == productId)
+                .Include(p => p.Farmer)
+                .FirstOrDefaultAsync();
+
+            if (product != null && product.Farmer != null)
+            {
+                return (product.Farmer.FirstName, product.Farmer.LastName);
+            }
+            else
+            {
+                return (null, null); // or throw exception if necessary
+            }
+        }
         public bool Save()
         {
             var saved = _context.SaveChanges();

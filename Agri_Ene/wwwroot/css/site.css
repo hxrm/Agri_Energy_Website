@@ -22,13 +22,13 @@ html {
     background: linear-gradient(to right, #0062E6, #33AEFF);
 }*/
 body {
-    /* background-color: #EDFFF2; /Default background color */
+     background-color: #EDFFF2; /Default background color */
     
-    background: rgb(168,179,68);
-    background: linear-gradient(0deg, rgba(168,179,68,1) 0%, rgba(184,255,129,1) 100%);
+  /*  background: rgb(168,179,68);
+    background: linear-gradient(0deg, rgba(168,179,68,1) 0%, rgba(184,255,129,1) 100%);*/
 }
 
-
+/*
 .bg-dark {
     background-color: #32362B;
 }
@@ -43,4 +43,4 @@ body {
 
 .bg-default {
     background-color: #EDFFF2;
-}
+}*/

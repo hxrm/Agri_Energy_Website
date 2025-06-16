@@ -1,6 +1,6 @@
 The Agri-Ene prototype has been developed using the Model-View-Controller (MVC) architectural pattern in combination with Entity Framework for data storage and access.  The web application technical solution comprises of many components to deliver fully functional application, components include a front-end, back-end, database, hosting, and security. (Troelsen & Japikse, 2021) 
 
-
+![image](https://github.com/user-attachments/assets/ad999f14-c608-4595-9a18-e6b5d9e34319)
 ## Front-end
 The front-end for the Agri-Energy prototype’s functionality leans on Razor views and controllers. When a user request is received, they are appropriately routed handled by the certain controller. The controller handles the request by carry out tasks relating to user input and back-end services to determine which view or webpage to render to the user. Razor view render or display view HTML for the user interface to deliver a webpage. Additionally, client-side technologies are used by the front-end to enhance user experience such as CSS for styling and JavaScript for dynamic interactions. The MVC pattern is modular and maintainable approach as there is a functional separation that makes it easy to incorporate change in to the website which will be essential for the dynamic nature of the agricultural market. (Troelsen & Japikse, 2021)  
 
